@@ -1,0 +1,14 @@
+{
+  "name": "webcc",
+  "version": "0.0.1",
+  "description": "Web compiler-compiler",
+  "main": "main.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test"
+  },
+  "author": "Richard Eitz",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^3.1.0"
+  }
+}

@@ -1,0 +1,4 @@
+block {
+	inteiro = 0
+	int eiro = 0
+}

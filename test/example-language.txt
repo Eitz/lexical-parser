@@ -1,0 +1,8 @@
+block {
+	int a = 0
+	int b = 3
+
+	if (a < b && b > a) {
+		print("Hello World")
+	}
+}
