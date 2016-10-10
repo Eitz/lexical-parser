@@ -2,7 +2,7 @@
   "name": "lexical-parser",
   "version": "0.0.1",
   "description": "Lexical Parser written in Javascript, using Node.js's environment",
-  "main": "LexicalParser.js",
+  "main": "main.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha test"
   },

@@ -7,8 +7,10 @@ Lexical Parser written in Javascript, using Node.js's environment
 
 ```js
 
-const LexicalParser = require('./path/to/LexicalParser')
-const TokenMatcher = require('./path/to/TokenMatcher')
+const LexicalParser = require('lexical-parser')
+const Token = LexicalParser.Token
+const TokenMatcher = LexicalParser.TokenMatcher
+const Lex = LexicalParser.Lex
 
 let input = 'block { int a = 0 int b = 3 if (a < b && b > a) { print("Hello World") } }';
 let tokenMatchers = [
@@ -28,7 +30,7 @@ let tokenMatchers = [
 	new TokenMatcher('string', '\".*?\"')
 ]
 let ignorePattern = '[\n\s \t]+'
-let lex = new LexicalParser(input, tokenMatchers, ignorePattern)
+let lex = new Lex(input, tokenMatchers, ignorePattern)
 do {
 	token = lex.nextToken()
 	console.log(token)

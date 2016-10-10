@@ -2,7 +2,7 @@
 
 const Token = require('./Token')
 
-class LexicalParser {
+class Lex {
 	
 	constructor(input, tokenMatchers, ignorePattern) {
 		if (input && typeof input == "string") {
@@ -99,4 +99,4 @@ class LexicalParser {
 	}
 }
 
-module.exports = LexicalParser
+module.exports = Lex
