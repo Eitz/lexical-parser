@@ -1,6 +1,6 @@
 {
   "name": "lexical-parser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Lexical Parser written in Javascript, using Node.js's environment",
   "main": "main.js",
   "scripts": {
