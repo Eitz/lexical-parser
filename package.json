@@ -1,6 +1,6 @@
 {
   "name": "lexical-parser",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Lexical Parser written in Javascript, using Node.js's environment",
   "main": "main.js",
   "scripts": {
@@ -11,8 +11,8 @@
   "devDependencies": {
     "mocha": "^3.1.0"
   },
-	"repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/Eitz/lexical-parser.git"
-	}
+  }
 }
