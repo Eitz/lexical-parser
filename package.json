@@ -2,13 +2,17 @@
   "name": "lexical-parser",
   "version": "0.0.1",
   "description": "Lexical Parser written in Javascript, using Node.js's environment",
-  "main": "main.js",
+  "main": "LexicalParser.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha test"
   },
-  "author": "Richard Eitz <http://github.com/Eitz>",
+  "author": "Richard W. Eitz <http://github.com/Eitz>",
   "license": "MIT",
   "devDependencies": {
     "mocha": "^3.1.0"
-  }
+  },
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eitz/lexical-parser.git"
+	}
 }
