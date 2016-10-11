@@ -1,5 +1,5 @@
 # lexical-parser
-Lexical Parser written in Javascript, using Node.js's environment
+Reads and \"tokenizes\" an input string given a set of string or regex patterns.
 
 # Example usage
 
@@ -7,34 +7,56 @@ Lexical Parser written in Javascript, using Node.js's environment
 
 ```js
 
-const LexicalParser = require('lexical-parser')
-const Token = LexicalParser.Token
-const TokenMatcher = LexicalParser.TokenMatcher
-const Lex = LexicalParser.Lex
+const Lex = require('../lexical-parser/Lex')
+const TokenMatcher = require('../lexical-parser/TokenMatcher')
+const LexicalError = require('../lexical-parser/LexicalError')
 
+// The string that you want to parse
 let input = 'block { int a = 0 int b = 3 if (a < b && b > a) { print("Hello World") } }';
+// Bad input for error testing:
+// let input = 'block { int a = 0 int b = 3 if (^ < b && b > a) { print("Hello World") } }';
+
+// Your tokenMatchers
+// The first parameter is the name and the second is the regex to match it
+// If the second parameter is ommitted, the match will be exactly the name of the token
 let tokenMatchers = [
-	new TokenMatcher('block'),
-	new TokenMatcher('if'),
-	new TokenMatcher('{'),
-	new TokenMatcher('}'),
-	new TokenMatcher('('),
-	new TokenMatcher(')'),
-	new TokenMatcher('<'),
-	new TokenMatcher('>'),
-	new TokenMatcher('='),
-	new TokenMatcher('&&'),
-	new TokenMatcher('int'),
-	new TokenMatcher('integer', '[0-9]+'),
-	new TokenMatcher('id', '[a-zA-Z][a-zA-Z0-9]*'),
-	new TokenMatcher('string', '\".*?\"')
+    new TokenMatcher('block'),
+    new TokenMatcher('if'),
+    new TokenMatcher('{'),
+    new TokenMatcher('}'),
+    new TokenMatcher('('),
+    new TokenMatcher(')'),
+    new TokenMatcher('<'),
+    new TokenMatcher('>'),
+    new TokenMatcher('='),
+    new TokenMatcher('&&'),
+    new TokenMatcher('int'),
+    new TokenMatcher('integer', '[0-9]+'),
+    new TokenMatcher('id', '[a-zA-Z][a-zA-Z0-9]*'),
+    new TokenMatcher('string', '\".*?\"')
 ]
+// The pattern to ignore in the input
 let ignorePattern = '[\n\s \t]+'
+// Instantiating the lexer
 let lex = new Lex(input, tokenMatchers, ignorePattern)
-do {
-	token = lex.nextToken()
-	console.log(token)
-} while (token)
+// Generating tokens, safely!
+try {
+	do {
+			// token! token! token!
+			token = lex.nextToken()
+			console.log(token)
+	} while (token)
+} catch (err) {
+	// Error handling :(
+	if (err instanceof LexicalError) {
+		console.log(`\n${err.message}\n`)
+		console.log(`Position: ${err.position}`)
+		console.log(`Character: ${err.character}`)
+		console.log(`Nearby code: ${err.code}`)
+	}
+	else
+		console.log(err)
+}
 ```
 ### Output
 ```js

@@ -1,7 +1,7 @@
 {
   "name": "lexical-parser",
   "version": "0.1.1",
-  "description": "Lexical Parser written in Javascript, using Node.js's environment",
+  "description": "Reads and \"tokenizes\" an input string given a set of string or regex patterns.",
   "main": "main.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha test"
