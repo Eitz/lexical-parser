@@ -1,5 +1,11 @@
 # lexical-parser
-Reads and \"tokenizes\" an input string given a set of string or regex patterns.
+Reads and "tokenizes" an input string given a set of string or regex patterns.
+
+# Roadmap
+
+- [X] Get token by token
+- [ ] Get all the tokens all at once
+- [ ] Implement events (onToken, onIgnoreInput)
 
 # Example usage
 
@@ -20,20 +26,20 @@ let input = 'block { int a = 0 int b = 3 if (a < b && b > a) { print("Hello Worl
 // The first parameter is the name and the second is the regex to match it
 // If the second parameter is ommitted, the match will be exactly the name of the token
 let tokenMatchers = [
-    new TokenMatcher('block'),
-    new TokenMatcher('if'),
-    new TokenMatcher('{'),
-    new TokenMatcher('}'),
-    new TokenMatcher('('),
-    new TokenMatcher(')'),
-    new TokenMatcher('<'),
-    new TokenMatcher('>'),
-    new TokenMatcher('='),
-    new TokenMatcher('&&'),
-    new TokenMatcher('int'),
-    new TokenMatcher('integer', '[0-9]+'),
-    new TokenMatcher('id', '[a-zA-Z][a-zA-Z0-9]*'),
-    new TokenMatcher('string', '\".*?\"')
+	new TokenMatcher('block'),
+	new TokenMatcher('if'),
+	new TokenMatcher('{'),
+	new TokenMatcher('}'),
+	new TokenMatcher('('),
+	new TokenMatcher(')'),
+	new TokenMatcher('<'),
+	new TokenMatcher('>'),
+	new TokenMatcher('='),
+	new TokenMatcher('&&'),
+	new TokenMatcher('int'),
+	new TokenMatcher('integer', '[0-9]+'),
+	new TokenMatcher('id', '[a-zA-Z][a-zA-Z0-9]*'),
+	new TokenMatcher('string', '\".*?\"')
 ]
 // The pattern to ignore in the input
 let ignorePattern = '[\n\s \t]+'
@@ -42,9 +48,9 @@ let lex = new Lex(input, tokenMatchers, ignorePattern)
 // Generating tokens, safely!
 try {
 	do {
-			// token! token! token!
-			token = lex.nextToken()
-			console.log(token)
+		// token! token! token!
+		token = lex.nextToken()
+		console.log(token)
 	} while (token)
 } catch (err) {
 	// Error handling :(
