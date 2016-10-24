@@ -1,3 +1,5 @@
+'use strict';
+
 class LexicalError extends Error {
 	constructor(character, position, code) {
 		super(`Syntax Error at position ${position}, character '${character}' not recognized. Here: '${code}'.`)
