@@ -79,7 +79,7 @@ class Lex {
 			this.position += difference
 			return true
 		}
-		// Syntax Error
+		// Error
 		return false;
 	}
 

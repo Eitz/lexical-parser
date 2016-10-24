@@ -69,6 +69,18 @@ try {
 ```
 ### Output
 ```js
+Token { name: 'block', lexeme: 'block', position: 0 }
+Token { name: '{', lexeme: '{', position: 6 }
+Token { name: 'int', lexeme: 'int', position: 8 }
+Token { name: 'id', lexeme: 'a', position: 12 }
+Token { name: '=', lexeme: '=', position: 14 }
+Token { name: 'integer', lexeme: '0', position: 16 }
+Token { name: 'int', lexeme: 'int', position: 18 }
+Token { name: 'id', lexeme: 'b', position: 22 }
+Token { name: '=', lexeme: '=', position: 24 }
+Token { name: 'integer', lexeme: '3', position: 26 }
+Token { name: 'if', lexeme: 'if', position: 28 }
+Token { name: '(', lexeme: '(', position: 31 }
 Token { name: 'id', lexeme: 'a', position: 32 }
 Token { name: '<', lexeme: '<', position: 34 }
 Token { name: 'id', lexeme: 'b', position: 36 }
