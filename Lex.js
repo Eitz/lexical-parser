@@ -22,7 +22,7 @@ class Lex {
 		tokenMatchers.sort(function (a, b) {
 			if (a.isRegex && !b.isRegex)
 				return false
-			return true
+			return a.match.length < b.match.length
 		})
 		
 		let regExp = ''
