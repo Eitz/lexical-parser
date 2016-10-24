@@ -1,17 +1,15 @@
 'use strict';
 
 const Token = require('./Token')
+const LexicalError = require('./LexicalError')
 
 class Lex {
 	
 	constructor(input, tokenMatchers, ignorePattern) {
-		if (input && typeof input == "string") {
-			this.input = input
-			this.workingInput = this.input
-		}
-		this.ignorePattern = ignorePattern
+		if (input && typeof input == "string")
+			this.input = this.workingInput = input
+		this.ignorePattern = ignorePattern ? new RegExp("^" + ignorePattern, 'g') : ''
 		this.setTokenMatcher(tokenMatchers || new Array())
-		this.currentToken = undefined
 		this.position = 0
 	}
 
@@ -31,12 +29,24 @@ class Lex {
 				regExp += '|'
 			regExp += `(^${tokenMatchers[i].match})` 
 		}
+
 		this.tokenMatchers = tokenMatchers
 		this.tokenMatcher = new RegExp(regExp, 'g')
 	}
 
-	hasInput() {
-		return this.position < this.input.length
+	nextToken() {
+		while (this.workingInput.length > 0) {
+			let result = this.workingInput.replace(this.tokenMatcher, this._replacer.bind(this))
+			let difference = this.workingInput.length - result.length
+			if (difference > 0) {
+				this.position += difference
+				this.workingInput = result
+				return new Token(this._tempToken.name, this._tempToken.lex, this.position - this._tempToken.lex.length)
+			}
+			else if (!this.attemptToIgnoreChars())				
+					this.parsingError()
+		}
+		return undefined
 	}
 
 	_replacer() {
@@ -61,8 +71,8 @@ class Lex {
 		return '';
 	}
 
-	ignorableChars() {
-		let result = this.workingInput.replace(new RegExp("^" + this.ignorePattern, 'g'), '')
+	attemptToIgnoreChars() {
+		let result = this.workingInput.replace(this.ignorePattern, '')
 		let difference = this.workingInput.length - result.length
 		if (difference > 0) {
 			this.workingInput = result
@@ -73,29 +83,11 @@ class Lex {
 		return false;
 	}
 
-	nextToken() {
-		while (this.workingInput.length > 0) {
-			let result = this.workingInput.replace(this.tokenMatcher, this._replacer.bind(this))
-			let difference = this.workingInput.length - result.length
-			if (difference > 0) {
-				this.position += difference
-				this.workingInput = result
-				if (this._tempToken){
-					return new Token(this._tempToken.name, this._tempToken.lex, this.position - this._tempToken.lex.length)
-				} else {
-					 throw new Error("wut")
-				}
-			}
-			else {
-				if (!this.ignorableChars()) {				
-					let begin = this.position > 20 ? this.position - 20 : 0 
-					let add = this.input.length > this.position + 20 ? 20 : this.input.length - this.position
-					let errStrg = this.input.substring(begin, this.position + add)
-					throw new Error(`Syntax Error at position ${this.position}, character '${this.workingInput[0]}' not recognized. Here: '${errStrg}'.`)
-				}
-			}
-		}
-		return undefined
+	parsingError() {
+		let begin = this.position > 20 ? this.position - 20 : 0 
+		let add = this.input.length > this.position + 20 ? 20 : this.input.length - this.position
+		let errStrg = this.input.substring(begin, this.position + add)
+		throw new LexicalError(this.workingInput[0], this.position, errStrg)
 	}
 }
 
