@@ -1,6 +1,7 @@
 'use strict';
 
 const Token = require('./Token')
+const TokenMatcher = require('./TokenMatcher')
 const LexicalError = require('./LexicalError')
 
 class Lex {
@@ -13,23 +14,34 @@ class Lex {
 		this.position = 0
 	}
 
-	setTokenMatcher(tokenMatchers) {
-		if (tokenMatchers.length == 0)
+	setTokenMatcher(_tokenMatchers) {
+		if (_tokenMatchers.length == 0)
 			return
 
-		tokenMatchers.sort(function (a, b) {
-			if (a.isRegex && !b.isRegex)
-				return false
-			return a.match.length < b.match.length
+		let tokenMatchers = new Array()
+		for (let t of _tokenMatchers) {
+			if (t instanceof Array)
+				tokenMatchers.push(new TokenMatcher(t[0], t[1]))
+			else
+				tokenMatchers.push(new TokenMatcher(t))
+		}
+
+		tokenMatchers = tokenMatchers.sort(function (a, b) {
+			if (b.isRegex && !a.isRegex)
+				return 1
+			if (!b.isRegex && a.isRegex)
+				return -1
+			return b.match.toString().length - a.match.toString().length 
 		})
+
 		
 		let regExp = ''
 		for(let i=0; i<tokenMatchers.length;i++) {
 			if (i>0)
 				regExp += '|'
-			regExp += `(^${tokenMatchers[i].match})` 
+			regExp += `(^${tokenMatchers[i].match.toString().replace(/^\/|\/$/g, '')})` 
 		}
-
+		
 		this.tokenMatchers = tokenMatchers
 		this.tokenMatcher = new RegExp(regExp, 'g')
 	}

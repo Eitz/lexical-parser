@@ -16,8 +16,11 @@ class TokenMatcher {
 		}
 		if (!this.isRegex) {
 			value = escapeRegExp(value)
-		}		
-		this.match = value	
+		}
+		if (this.match instanceof RegExp)
+			this.match = value
+		else
+			this.match = new RegExp(value)
 	}
 }
 

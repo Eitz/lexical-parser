@@ -12,22 +12,22 @@ describe('Lex', function() {
 	input[1] = fs.readFileSync("./test/example-wrong-language.txt", "utf8");
 	input[2] = fs.readFileSync("./test/example-advanced-language.txt", "utf8");
 	let tokenMatchers = [
-  	new TokenMatcher('block'),
-  	new TokenMatcher('if'),
-  	new TokenMatcher('{'),
-  	new TokenMatcher('}'),
-  	new TokenMatcher('('),
-  	new TokenMatcher(')'),
-		new TokenMatcher('<'),
-  	new TokenMatcher('>'),
-		new TokenMatcher('='),
-		new TokenMatcher('&&'),
-		new TokenMatcher('<='),
-		new TokenMatcher('>='),
-		new TokenMatcher('int'),
-  	new TokenMatcher('integer', '[0-9]+'),
-		new TokenMatcher('id', '[a-zA-Z][a-zA-Z0-9]*'),
-		new TokenMatcher('string', '\".*?\"'),  
+  	'block',
+  	'if',
+  	'{',
+  	'}',
+  	'(',
+  	')',
+		'<',
+  	'>',
+		'=',
+		'&&',
+		'<=',
+		'>=',
+		'int',
+  	['integer', /[0-9]+/],
+		['id', /[a-zA-Z][a-zA-Z0-9]*/],
+		['string', /\".*?\"/],  
 	]
 	let ignorePattern = '[\n\s \t]+'
 	

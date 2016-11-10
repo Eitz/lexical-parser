@@ -2,7 +2,7 @@
   "name": "lexical-parser",
   "version": "0.2.3",
   "description": "Reads and \"tokenizes\" an input string given a set of string or regex patterns.",
-  "main": "main.js",
+  "main": "Lex.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha test"
   },
