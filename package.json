@@ -1,6 +1,6 @@
 {
   "name": "lexical-parser",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "description": "Reads and \"tokenizes\" an input string given a set of string or regex patterns.",
   "main": "Lex.js",
   "scripts": {
