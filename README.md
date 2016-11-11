@@ -5,7 +5,7 @@ Reads and "tokenizes" an input string given a set of string or regex patterns.
 
 - [X] Get token by token
 - [ ] Output line numbers
-- [ ] Get all the tokens all at once
+- [X] Get all the tokens all at once
 - [ ] Implement events (onToken, onIgnoreInput)
 
 # Example usage

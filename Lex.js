@@ -14,6 +14,12 @@ class Lex {
 		this.position = 0
 	}
 
+	setInput(input) {
+		if (input && typeof input == "string")
+			this.input = this.workingInput = input
+		this.position = 0
+	}
+
 	setTokenMatcher(_tokenMatchers) {
 		if (_tokenMatchers.length == 0)
 			return
@@ -55,8 +61,8 @@ class Lex {
 				this.workingInput = result
 				return new Token(this._tempToken.name, this._tempToken.lex, this.position - this._tempToken.lex.length)
 			}
-			else if (!this.attemptToIgnoreChars())				
-					this.parsingError()
+			else if (!this._attemptToIgnoreChars())				
+					this._parsingError()
 		}
 		return undefined
 	}
@@ -83,7 +89,7 @@ class Lex {
 		return '';
 	}
 
-	attemptToIgnoreChars() {
+	_attemptToIgnoreChars() {
 		let result = this.workingInput.replace(this.ignorePattern, '')
 		let difference = this.workingInput.length - result.length
 		if (difference > 0) {
@@ -95,11 +101,19 @@ class Lex {
 		return false;
 	}
 
-	parsingError() {
+	_parsingError() {
 		let begin = this.position > 20 ? this.position - 20 : 0 
 		let add = this.input.length > this.position + 20 ? 20 : this.input.length - this.position
 		let errStrg = this.input.substring(begin, this.position + add)
 		throw new LexicalError(this.workingInput[0], this.position, errStrg)
+	}
+
+	getTokens() {
+		let tokens = new Array()
+		do {
+			token = lex.nextToken()
+		} while (token)
+		return tokens
 	}
 }
 
