@@ -1,14 +1,34 @@
-# lexical-parser
+# Lexical Parser (lexical-parser)
+
+## About
+
 Reads and "tokenizes" an input string given a set of string or regex patterns.
 
-# Roadmap
+### Purpose
+
+With this module you are able to make the string "int a = 5" become this:
+```js
+Token { name: 'int', lexeme: 'int', position: 0 }
+Token { name: 'id', lexeme: 'a', position: 4 }
+Token { name: '=', lexeme: '=', position: 6 }
+Token { name: 'integer', lexeme: '0', position: 8 }
+```
+
+### Installing
+ Install this module in your project by running:
+
+```bash
+$ npm install --save lexical-parser
+```
+
+### Roadmap
 
 - [X] Get token by token
-- [ ] Output line numbers
 - [X] Get all the tokens all at once
+- [ ] Output line numbers
 - [ ] Implement events (onToken, onIgnoreInput)
 
-# Example usage
+## Example usage
 
 ```js
 'use strict';
