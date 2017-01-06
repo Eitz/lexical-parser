@@ -11,7 +11,7 @@ With this module you are able to make the string "int a = 5" become this:
 Token { name: 'int', lexeme: 'int', position: 0 }
 Token { name: 'id', lexeme: 'a', position: 4 }
 Token { name: '=', lexeme: '=', position: 6 }
-Token { name: 'integer', lexeme: '0', position: 8 }
+Token { name: 'integer', lexeme: '5', position: 8 }
 ```
 
 ### Installing
