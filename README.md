@@ -2,11 +2,11 @@
 
 ## About
 
-Reads and "tokenizes" an input string given a set of string or regex patterns.
+Reads and tokenizes an input string given a set of string or regex patterns.
 
 ### Purpose
 
-With this module you are able to make the string "int a = 5" become this:
+With this module you are able to parse a string like "int a = 5" into this:
 ```js
 Token { name: 'int', lexeme: 'int', position: 0 }
 Token { name: 'id', lexeme: 'a', position: 4 }
@@ -20,13 +20,6 @@ Token { name: 'integer', lexeme: '5', position: 8 }
 ```bash
 $ npm install --save lexical-parser
 ```
-
-### Roadmap
-
-- [X] Get token by token
-- [X] Get all the tokens all at once
-- [ ] Output line numbers
-- [ ] Implement events (onToken, onIgnoreInput)
 
 ## Example usage
 
